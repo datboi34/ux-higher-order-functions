@@ -53,7 +53,21 @@ let products = [
 let chosenDepartment = "";
 
 function renderProducts() {
-  let html = ""; // Your code here!
+  let html = "";
+  let inStockItems = products.filter((product) => product.quantity > 0);
+  let departmentItems = inStockItems.filter((product) => {
+    if (product.department === chosenDepartment) {
+      return true;
+    } else if (chosenDepartment === "") {
+      return true;
+    }
+  });
+  let mappItems = departmentItems.map(
+    (product) => `<li><h3> ${product.name}</h3> ${product.price}</li>`
+  );
+  html = mappItems.reduce((accum, currentVal) => accum + currentVal);
+  // Your code here!
+
   /*
     using the product array
 
